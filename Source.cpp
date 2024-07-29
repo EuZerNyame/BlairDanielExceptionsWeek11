@@ -20,30 +20,31 @@ char character(char start, int offset) {
     if (!((start >= 'A' && start <= 'Z') || (start >= 'a' && start <= 'z'))) {
         throw invalidCharacterException();
     }
-
     // Calculate the character with the given offset
     char result = start + offset;
-
     // Check if the result is a letter
     if (!((result >= 'A' && result <= 'Z') || (result >= 'a' && result <= 'z'))) {
         throw invalidRangeException();
     }
-
-    // Returning the result character
+    // Return the resulting character
     return result;
 }
 int main() {
-    try {
-        char start = 'a';
-        int offset = 1;
-        char result = character(start, offset);
-        cout << "Resulting character: " << result << endl;
-    }
-    catch (const invalidCharacterException& e) {
-        cerr << e.what() << endl;
-    }
-    catch (const invalidRangeException& e) {
-        cerr << e.what() << endl;
+    // Test cases
+    char testStarts[] = { 'a', 'Z', 'm', 'A', '*', 'z' };
+    int testOffsets[] = { 1, -1, 13, 25, 10, 1 };
+    int numTests = sizeof(testStarts) / sizeof(testStarts[0]);
+    for (int i = 0; i < numTests; ++i) {
+        try {
+            char result = character(testStarts[i], testOffsets[i]);
+            cout << "character('" << testStarts[i] << "', " << testOffsets[i] << ") = " << result << endl;
+        }
+        catch (const invalidCharacterException& e) {
+            cerr << "Error for character('" << testStarts[i] << "', " << testOffsets[i] << "): " << e.what() << endl;
+        }
+        catch (const invalidRangeException& e) {
+            cerr << "Error for character('" << testStarts[i] << "', " << testOffsets[i] << "): " << e.what() << endl;
+        }
     }
     return 0;
 }
