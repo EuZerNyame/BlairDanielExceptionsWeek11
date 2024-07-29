@@ -1,9 +1,9 @@
 /* CIS 1202.201 Daniel Blair 7/28/2024
- * This program defines a function 'character' that calculates a character based on
- * a given starting character and an offset, with error handling for invalid inputs.
- * It includes custom exceptions 'invalidCharacterException' and 'invalidRangeException'
- * to handle non-letter start characters and out-of-range results, respectively.
- * The main function tests the 'character' function with various inputs and demonstrates
+ * This program defines a function 'character' that calculates a character based on 
+ * a given starting character and an offset, with error handling for invalid inputs. 
+ * It includes custom exceptions 'invalidCharacterException' and 'invalidRangeException' 
+ * to handle non-letter start characters and out-of-range results, respectively. 
+ * The main function allows the user to input their own test values and demonstrates 
  * exception handling.
  */
 #include <iostream>
@@ -38,10 +38,13 @@ char character(char start, int offset) {
     return result;
 }
 int main() {
+    char start;
+    int offset;
     // Test cases
     char testStarts[] = { 'a', 'Z', 'm', 'A', '*', 'z' };
     int testOffsets[] = { 1, -1, 13, 25, 10, 1 };
     int numTests = sizeof(testStarts) / sizeof(testStarts[0]);
+    cout << "Testing predefined cases:\n";
     for (int i = 0; i < numTests; ++i) {
         try {
             char result = character(testStarts[i], testOffsets[i]);
@@ -53,6 +56,21 @@ int main() {
         catch (const invalidRangeException& e) {
             cerr << "Error for character('" << testStarts[i] << "', " << testOffsets[i] << "): " << e.what() << endl;
         }
+    }
+    cout << "\nEnter your own test case:\n";
+    cout << "Enter a starting character: ";
+    cin >> start;
+    cout << "Enter an offset: ";
+    cin >> offset;
+    try {
+        char result = character(start, offset);
+        cout << "character('" << start << "', " << offset << ") = " << result << endl;
+    }
+    catch (const invalidCharacterException& e) {
+        cerr << "Error for character('" << start << "', " << offset << "): " << e.what() << endl;
+    }
+    catch (const invalidRangeException& e) {
+        cerr << "Error for character('" << start << "', " << offset << "): " << e.what() << endl;
     }
     return 0;
 }
