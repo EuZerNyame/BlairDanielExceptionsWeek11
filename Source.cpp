@@ -1,3 +1,11 @@
+/* CIS 1202.201 Daniel Blair 7/28/2024
+ * This program defines a function 'character' that calculates a character based on
+ * a given starting character and an offset, with error handling for invalid inputs.
+ * It includes custom exceptions 'invalidCharacterException' and 'invalidRangeException'
+ * to handle non-letter start characters and out-of-range results, respectively.
+ * The main function tests the 'character' function with various inputs and demonstrates
+ * exception handling.
+ */
 #include <iostream>
 #include <stdexcept>
 using namespace std;
